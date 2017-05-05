@@ -28,17 +28,21 @@ init();
 document.querySelector('.btn-roll').addEventListener('click', function () {
 	if (gamePlaying) {
 		// 1. Random number
-		var dice = Math.floor(Math.random() * 6) + 1;
+		var dice1 = Math.floor(Math.random() * 6) + 1;
+		var dice2 = Math.floor(Math.random() * 6) + 1;
 
 		// 2. Display the result
-		var diceDOM = document.querySelector('.dice');
-		diceDOM.style.display = 'block';
-		diceDOM.src = 'dice-' + dice + '.png';
+		var diceDOM1 = document.querySelector('.dice1');
+		var diceDOM2 = document.querySelector('.dice2');
+		diceDOM1.style.display = 'block';
+		diceDOM2.style.display = 'block';
+		diceDOM1.src = 'dice-' + dice1 + '.png';
+		diceDOM2.src = 'dice-' + dice2 + '.png';
 
 		// 3. Update the round score IF the rolled number was not a 1
-		if (dice !== 1) {
+		if (dice1 !== 1 & dice2 !== 1) {
 			// Add Score
-			roundScore += dice;
+			roundScore = roundScore + dice1 + dice2;
 			document.querySelector('#current-' + activePlayer).textContent = roundScore;
 		} else {
 			// Switch to next player
@@ -60,15 +64,22 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
 		if (scores[activePlayer] >= 100) {
 			// Game is over...user must hit New game button which re-initializes game and resets gamePlaying state variable
 			gamePlaying = false;
-			// Change Player name to Winner
+			
+			// Make active player the winner
 			document.querySelector('#name-' + activePlayer).textContent = 'WINNER!';
+			// Style winning player
 			document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+			// Once a game is won remove the active player indicator
 			document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
-			document.querySelector('.dice').style.display = 'none';
+			
+			// Hide dice
+			document.querySelector('.dice1').style.display = 'none';
+			document.querySelector('.dice2').style.display = 'none';
+
 
 			// Disable roll dice  and hold buttons
-			document.querySelector('.btn-roll').disabled = true;
-			document.querySelector('.btn-hold').disabled = true;
+//			document.querySelector('.btn-roll').disabled = true;
+//			document.querySelector('.btn-hold').disabled = true;
 
 
 		} else {
@@ -84,8 +95,8 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
 document.querySelector('.btn-new').addEventListener('click', function () {
 
 	// Re-Enable roll and hold buttons
-	document.querySelector('.btn-roll').disabled = false;
-	document.querySelector('.btn-hold').disabled = false;
+//	document.querySelector('.btn-roll').disabled = false;
+//	document.querySelector('.btn-hold').disabled = false;
 
 	// Re-initialize game values
 	init();
@@ -107,7 +118,9 @@ function init() {
 	activePlayer = 0; /* First player = 0, Second player = 1 */
 
 	// Hide the dice
-	document.querySelector('.dice').style.display = 'none';
+	document.querySelector('.dice1').style.display = 'none';
+	document.querySelector('.dice2').style.display = 'none';
+
 
 	// Reset players scores
 	document.getElementById('score-0').textContent = '0';
@@ -151,7 +164,9 @@ function switchPlayer() {
 	document.querySelector('.player-1-panel').classList.toggle('active');
 
 	// Hide he dice so that next player has a place to roll his dice.
-	document.querySelector('.dice').style.display = 'none';
+	document.querySelector('.dice1').style.display = 'none';
+	document.querySelector('.dice2').style.display = 'none';
+
 
 }
 
