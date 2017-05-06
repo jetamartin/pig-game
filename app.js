@@ -15,18 +15,27 @@ Change game to follow these rules:
 1. A player looses his ENTIRE score when he rolls two 6 in a row. After that, it's the next player's turn (Hint: Always save the previous dice roll in a separate variable)
 2. Add an input field to the HTML where players cn set the winning score, so that they can change the predeifined score of 100. (Hint: you can read that value with the .value property in JavaScript. This is a food opportunity to use google to figure this out :)
 3. Add another dice to the game so that there are two dices now. The player looses his current score when one of them is a 1. (Hint: you will need CSS to position the second dice so take a look at the CSS for the first one.)
-
+4. If either dice roll results in a 1 make both the dice appear but have them quickly fade away rather than just not show up. 
 */
 
 var scores, roundScore, activePlayer, gamePlaying;
+//var bounceOut = 'bounceOutUp';
+//var rotateOut = 'rotateOut';
 
 // Initialize all values of the game
 init();
 
-
+// ******************* ROLL BUTTON *******************************
 // User clicks the "Roll" button
+// ******************* ROLL BUTTON *******************************
+
 document.querySelector('.btn-roll').addEventListener('click', function () {
 	if (gamePlaying) {
+
+		// Need to reset animation
+		resetAnimation('bounceOutUp');
+		resetAnimation('rotateOut');
+
 		// 1. Random number
 		var dice1 = Math.floor(Math.random() * 6) + 1;
 		var dice2 = Math.floor(Math.random() * 6) + 1;
@@ -34,8 +43,12 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
 		// 2. Display the result
 		var diceDOM1 = document.querySelector('.dice1');
 		var diceDOM2 = document.querySelector('.dice2');
+
+		// Display dice 
 		diceDOM1.style.display = 'block';
 		diceDOM2.style.display = 'block';
+
+		// Display dice image corresponding to dice number rolled
 		diceDOM1.src = 'dice-' + dice1 + '.png';
 		diceDOM2.src = 'dice-' + dice2 + '.png';
 
@@ -44,19 +57,31 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
 			// Add Score
 			roundScore = roundScore + dice1 + dice2;
 			document.querySelector('#current-' + activePlayer).textContent = roundScore;
+
 		} else {
+
+			// Animate fadeout of dice when a 1 is rolled
+			addAnimation('rotateOut');
+
 			// Switch to next player
 			switchPlayer();
 		}
 	}
 
 });
+// ******************* HOLD BUTTON *******************************
 
-// User clicks the HOld button
+// User clicks the Hold button
+
+// ******************* HOLD BUTTON *******************************
+
+
 document.querySelector('.btn-hold').addEventListener('click', function () {
 	if (gamePlaying) {
+
 		// 1. Add current score to global score of player
 		scores[activePlayer] += roundScore;
+
 		// 2. Update the UI
 		document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
@@ -64,25 +89,24 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
 		if (scores[activePlayer] >= 100) {
 			// Game is over...user must hit New game button which re-initializes game and resets gamePlaying state variable
 			gamePlaying = false;
-			
+
 			// Make active player the winner
 			document.querySelector('#name-' + activePlayer).textContent = 'WINNER!';
 			// Style winning player
 			document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
 			// Once a game is won remove the active player indicator
 			document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
-			
+
 			// Hide dice
 			document.querySelector('.dice1').style.display = 'none';
 			document.querySelector('.dice2').style.display = 'none';
 
 
-			// Disable roll dice  and hold buttons
-//			document.querySelector('.btn-roll').disabled = true;
-//			document.querySelector('.btn-hold').disabled = true;
-
-
 		} else {
+
+			// Animate
+			addAnimation('bounceOutUp');
+
 			// Switch to next player
 			switchPlayer();
 		}
@@ -91,20 +115,18 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
 
 });
 
+// ******************* NEW GAME BUTTON *******************************
 // User clicks the New game button
-document.querySelector('.btn-new').addEventListener('click', function () {
+// ******************* NEW GAME BUTTON *******************************
 
-	// Re-Enable roll and hold buttons
-//	document.querySelector('.btn-roll').disabled = false;
-//	document.querySelector('.btn-hold').disabled = false;
+document.querySelector('.btn-new').addEventListener('click', function () {
 
 	// Re-initialize game values
 	init();
-
-	// Reset scores to Zero
-
-
 });
+
+
+/********************* Supporting function **********************/
 
 function init() {
 	// Initialize Gameplaying state variable
@@ -162,15 +184,53 @@ function switchPlayer() {
 	// Change UI so it reflects who is now active player by toggling class 'active'
 	document.querySelector('.player-0-panel').classList.toggle('active');
 	document.querySelector('.player-1-panel').classList.toggle('active');
+}
 
-	// Hide he dice so that next player has a place to roll his dice.
-	document.querySelector('.dice1').style.display = 'none';
-	document.querySelector('.dice2').style.display = 'none';
+function addAnimation(animationType) {
 
+	document.querySelector('.dice1').classList.add(animationType); //.replace(/^"(.+(?="$))"$/, '$1'));
+	document.querySelector('.dice2').classList.add(animationType); //.replace(/^"(.+(?="$))"$/, '$1'));
+}
 
+/* When a player rolls a one you want the dice to appear briefly and then automatically exit with animation. To get this to work successfully you must reset the animateion after it runs or it will not re-run again (and hence the dice will not appear) when two players roll "ones" back to back. 
+*/
+function resetAnimation(animationType) {
+
+// reset the transition by...
+	document.querySelector('.dice1').addEventListener("animationend", function (e) {
+			e.preventDefault;
+
+			// -> removing the animation class
+			document.querySelector('.dice1').classList.remove(animationType);
+		
+			// Need to hide dice or will reappear at the end of the animation
+			document.querySelector('.dice1').style.display = 'none';
+		
+
+			// -> triggering reflow /* The actual magic */
+			// without this statement the solution won't work...don't really understand why this 'magic statement is needed. 
+			void document.querySelector('.dice1').offsetWidth;
+
+		}, false);
+	
+	document.querySelector('.dice2').addEventListener("animationend", function (e) {
+		e.preventDefault;
+
+		// -> removing the class
+		document.querySelector('.dice2').classList.remove(animationType);
+		document.querySelector('.dice2').style.display = 'none';
+
+		// -> triggering reflow /* The actual magic */
+		// without this statement the solution won't work...don't really understand why this 'magic statement is needed. 
+		void document.querySelector('.dice2').offsetWidth;
+
+	}, false);
 }
 
 
+	// Thought I would have to use Regex to remove quotes from animatedType but it wasn't needed
+	// Reset animation so it will run again
+	//	document.querySelector('.dice1').classList.add(animation.replace(/^"(.+(?="$))"$/, '$1'));
+	//	document.querySelector('.dice2').classList.add(animation.replace(/^"(.+(?="$))"$/, '$1'));
 
-//document.querySelector('#current-' + activePlayer).textContent = dice;
-//document.querySelector('#current-' + activePlayer).textContent = dice;
+	
