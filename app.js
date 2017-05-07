@@ -15,7 +15,13 @@ Change game to follow these rules:
 1. A player looses his ENTIRE score when he rolls two 6 in a row. After that, it's the next player's turn (Hint: Always save the previous dice roll in a separate variable)
 2. Add an input field to the HTML where players cn set the winning score, so that they can change the predeifined score of 100. (Hint: you can read that value with the .value property in JavaScript. This is a food opportunity to use google to figure this out :)
 3. Add another dice to the game so that there are two dices now. The player looses his current score when one of them is a 1. (Hint: you will need CSS to position the second dice so take a look at the CSS for the first one.)
-4. If either dice roll results in a 1 make both the dice appear but have them quickly fade away rather than just not show up. 
+4. Add animation
+a) If either dice roll results in a 1 make both the dice appear but have them quickly fade away rather than just not show up. 
+b) When the user clicks hold then animate dice disappearance
+5) Add a match score to keep track of number of games each player has won. 
+6) A settings modal that allows game options to be changed at any time during the game (except during a player's turn)
+7) A choice between a one-dice or two-dice game (which can be changed at any time in the settings menu)
+8) A help modal which provides instructions for the game (including my implementation of slightly different game rules for the two-dice mode).
 */
 
 var scores, roundScore, activePlayer, gamePlaying;
@@ -193,6 +199,7 @@ function addAnimation(animationType) {
 }
 
 /* When a player rolls a one you want the dice to appear briefly and then automatically exit with animation. To get this to work successfully you must reset the animateion after it runs or it will not re-run again (and hence the dice will not appear) when two players roll "ones" back to back. 
+The follow resource is what clued me on how to do this: https://css-tricks.com/restart-css-animation/. I still don't completely understand why this works..but it does. 
 */
 function resetAnimation(animationType) {
 
