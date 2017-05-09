@@ -24,11 +24,28 @@ b) When the user clicks hold then animate dice disappearance
 8) A help modal which provides instructions for the game (including my implementation of slightly different game rules for the two-dice mode).
 */
 
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, gamesWonCount;
 //var bounceOut = 'bounceOutUp';
 //var rotateOut = 'rotateOut';
 
-// Initialize all values of the game
+/* Used to track how many games each players have won */
+gamesWonCount = [0,0]; 
+
+/* Animate entrance of matchscore heading ...note 'querySelector()' only returns first matching element so I had to use querySelectorAll() which returns a list of matching elements. Then I looped over that list to add the desired animation class.
+*/
+
+var matchScore = document.querySelectorAll('.matchScore');
+
+/* Note: Could have used simple assignment (e.g. matchScore[0] & matchScore[1] rather than loop but I wanted to practice loops. :-)
+*/
+for (var i = 0; i < matchScore.length; i++) {
+	matchScore[i].classList.add('flipInY');
+}
+
+
+/* Initialize all values of the game - note this method is also called when you click on "new game" button. Adding the concept of matches (multiple games)...may need to break this method into multiple parts e.g., initGame(), initMatch and initNewGame() as you may no need to initialize different levels of game variables at different concepts. 
+*/
+
 init();
 
 // ******************* ROLL BUTTON *******************************
@@ -39,8 +56,9 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
 	if (gamePlaying) {
 
 		// Need to reset animation
-		resetAnimation('bounceOutUp');
+		resetAnimation('rubberBand');
 		resetAnimation('rotateOut');
+		resetAnimation('bounceOutUp');
 
 		// 1. Random number
 		var dice1 = Math.floor(Math.random() * 6) + 1;
@@ -53,6 +71,10 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
 		// Display dice 
 		diceDOM1.style.display = 'block';
 		diceDOM2.style.display = 'block';
+		
+				
+		// 3. Add flip animation to dice
+		addAnimation('rubberBand');
 
 		// Display dice image corresponding to dice number rolled
 		diceDOM1.src = 'dice-' + dice1 + '.png';
@@ -92,9 +114,19 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
 		document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
 		// 3. Check if player won the game
-		if (scores[activePlayer] >= 100) {
+		if (scores[activePlayer] >= 20) {
 			// Game is over...user must hit New game button which re-initializes game and resets gamePlaying state variable
 			gamePlaying = false;
+			
+			// Update Games Won Count
+			gamesWonCount[activePlayer] += 1;
+			document.querySelector('.player-' + activePlayer + '-gamesWonCount').textContent = gamesWonCount[activePlayer];
+			
+			// Animate Games Won Count
+			document.querySelector('.player-' + activePlayer + '-gamesWonCount').classList.toggle('rubberBand');
+			
+			// Add transition count color from orange to white once you are on the scoreboard
+			document.querySelector('.player-' + activePlayer + '-gamesWonCount').classList.add('gameWinner');
 
 			// Make active player the winner
 			document.querySelector('#name-' + activePlayer).textContent = 'WINNER!';
@@ -165,11 +197,18 @@ function init() {
 	document.querySelector('.player-0-panel').classList.remove('winner');
 	document.querySelector('.player-1-panel').classList.remove('winner');
 
-
+	// Remove animation
+	document.querySelector('.player-0-gamesWonCount').classList.remove('ruberBand');
+	document.querySelector('.player-1-gamesWonCount').classList.remove('ruberBand');
+	
+	
 	// Ensure that Player 1 is only active player
 	document.querySelector('.player-0-panel').classList.remove('active');
 	document.querySelector('.player-1-panel').classList.remove('active');
 	document.querySelector('.player-0-panel').classList.add('active');
+	
+	// Animate Matchscore headings
+	
 
 }
 
@@ -211,7 +250,10 @@ function resetAnimation(animationType) {
 			document.querySelector('.dice1').classList.remove(animationType);
 		
 			// Need to hide dice or will reappear at the end of the animation
-			document.querySelector('.dice1').style.display = 'none';
+			if (e.animationName === 'rotateOut' || e.animationName === 'bounceOutUp') {
+				document.querySelector('.dice1').style.display = 'none';
+			}
+//			document.querySelector('.dice1').style.display = 'none';
 		
 
 			// -> triggering reflow /* The actual magic */
@@ -225,7 +267,10 @@ function resetAnimation(animationType) {
 
 		// -> removing the class
 		document.querySelector('.dice2').classList.remove(animationType);
-		document.querySelector('.dice2').style.display = 'none';
+		if (e.animationName === 'rotateOut' || e.animationName === 'bounceOutUp') {
+			document.querySelector('.dice2').style.display = 'none';
+		}
+
 
 		// -> triggering reflow /* The actual magic */
 		// without this statement the solution won't work...don't really understand why this 'magic statement is needed. 
