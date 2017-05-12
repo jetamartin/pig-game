@@ -1,55 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,600, 900" rel="stylesheet" type="text/css">
-        <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-        <link type="text/css" rel="stylesheet" href="style.css">
 
-        <title>Pig Game</title>
-    </head>
+<head>
+	<meta charset="UTF-8">
+	<link href="https://fonts.googleapis.com/css?family=Lato:100,300,600, 900" rel="stylesheet" type="text/css">
+	<link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
 
-    <body>
-        <div class="wrapper clearfix">
-            <div class="player-0-panel active">
-				<div class="matchScore animated">
-					<span>Games:</span>
-					<span class="player-0-gamesWonCount animated">0 </span>					
-				</div>
-                <div class="player-name" id="name-0">Player 1</div>
-                <div class="player-score" id="score-0">43</div>
-                <div class="player-current-box">
-                    <div class="player-current-label">Current</div>
-                    <div class="player-current-score" id="current-0">11</div>
-                </div>
-            </div>
+	<title>Pig Game</title>
+</head>
 
-            <div class="player-1-panel">
-				<div class="matchScore animated">
-					<span>Games:</span>
-					<span class="player-1-gamesWonCount animated">&nbsp;0 </span>					
-				</div>
-                <div class="player-name" id="name-1">Player 2</div>
-                <div class="player-score" id="score-1">72</div>
-                <div class="player-current-box">
-                    <div class="player-current-label">Current</div>
-                    <div class="player-current-score" id="current-1">0</div>
-                </div>
-            </div>
+<body>
+	<div class="wrapper clearfix">
+		<div class="player-0-panel active">
+			<div class="matchScore animated">
+				<span>Games:</span>
+				<span class="player-0-gamesWonCount animated">0 </span>
+			</div>
+			<div class="player-name" id="name-0">Player 1</div>
+			<div class="player-score" id="score-0">43</div>
+			<div class="player-current-box">
+				<div class="player-current-label">Current</div>
+				<div class="player-current-score" id="current-0">11</div>
+			</div>
+		</div>
 
-            <button class="btn-new"><i class="ion-ios-plus-outline"></i>New game</button>
-            <button class="btn-roll"><i class="ion-ios-loop"></i>Roll dice</button>
-            <button class="btn-hold"><i class="ion-ios-download-outline"></i>Hold</button>
-<!--			<div class="dice-1-panel">-->
-				<img src="dice-5.png" alt="Dice" class="dice1 animated">
-<!--			</div>-->
-<!--			<div class="dice-2-panel">-->
-<!--				<img src="dice-5.png" alt="Dice" class="dice1 animated">-->
-				<img src="dice-5.png" alt="Dice" class="dice2 animated">
-<!--			</div>-->
-        </div>
+		<div class="player-1-panel">
+			<div class="matchScore animated">
+				<span>Games:</span>
+				<span class="player-1-gamesWonCount animated">&nbsp;0 </span>
+			</div>
+			<div class="player-name" id="name-1">Player 2</div>
+			<div class="player-score" id="score-1">72</div>
+			<div class="player-current-box">
+				<div class="player-current-label">Current</div>
+				<div class="player-current-score" id="current-1">0</div>
+			</div>
+		</div>
+<!--		Test Start -->
+		<div class="messages fade-out is-paused"></div>
+<!--		Test End -->
+		<div class="scoreSetting">Winning Score:&nbsp; <span id="winScore">100</span></div>
+		<button class="btn-new"><i class="ion-ios-plus-outline"></i>New game</button>
+		<button class="btn-roll"><i class="ion-ios-loop"></i>Roll dice</button>
+		<button class="btn-hold"><i class="ion-ios-download-outline"></i>Hold</button>
+		<button class="btn-settings"><i class="ion-ios-gear-outline"></i>Settings</button>
+		<button class="btn-help"><i class="ion-ios-help-outline"></i>Help</button>
 
-        <script src="app.js"></script>
-    </body>
+		<div class="modal-dialog" id="modal-settings">
+			<div class="modal-content">
+				<span class="modal-btn-close"><i class="ion-ios-close-outline"></i></span>
+				<h2 class="modalTitle">Settings</h2>
+
+<!--				<form class="config-settings">-->
+					<div class="row clearfix">
+						<div>
+							<label>Player 1:</label>
+						</div>
+						<div>
+							<input type="text" name="input-name-0" id="input-name-0" maxlength="10" placeholder="Enter name">
+						</div>
+					</div>
+					<div class="row clearfix"> 
+						<div >
+							<label>Player 2:</label>
+						</div>
+						<div>
+							<input type="text" name="input-name-1" id="input-name-1" maxlength="6" placeholder="Enter name">
+						</div>
+					</div>
+					<div class="row clearfix">
+						<div>
+							<label>Winning Score:</label>
+						</div>
+						<div>
+							<input type="number" name="winning-score" id="winning-score" default="100" placeholder="Enter winning score">
+						</div>
+					</div>
+					<div class="row clearfix">
+						<div>
+							<label>Number of Dice:</label>
+						</div>
+						<div>
+							<select name="diceValues" id="dice-value">
+							  <option value=""> - Select - </option>
+							  <option value="dice-1">One Dice</option> 
+							  <option value="dice-2">Two Dice</option> 
+							</select>
+						</div>
+					</div>
+<!--				</form>-->
+				<button class="btn-save"><i class="ion-ios-checkmark-outline"></i>Save</button>
+				<button class="btn-cancel"><i class="ion-ios-close-outline"></i>Cancel</button>
+			</div>
+			
+		</div>
+		
+		<!--			<div class="dice-1-panel">-->
+		<img src="dice-5.png" alt="Dice" class="dice1 animated">
+		<!--			</div>-->
+		<!--			<div class="dice-2-panel">-->
+		<!--				<img src="dice-5.png" alt="Dice" class="dice1 animated">-->
+		<img src="dice-5.png" alt="Dice" class="dice2 animated">
+		<!--			</div>-->
+	</div>
+
+	<script src="app.js"></script>
+</body>
+
 </html>

@@ -61,7 +61,75 @@ body {
 	
 }
 
+.scoreSetting {
+	position: absolute;
+	top: 560px; /* top: 560px */ /* top: 10px */
+	left: 50%;
+	font-size: 20px;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	text-transform: uppercase;	
+}
+#winScore {
+	font-weight: bold;
+	color: red
+}
 
+.messages {
+	position: absolute;
+	top: 10px; /* top: 560px */ /* top: 10px */
+	left: 50%;
+	font-size: 20px;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+/*	text-transform: uppercase;*/
+/*
+	opacity: 0;
+	-webkit-animation-name: fadeOut;
+	animation-name: fadeOut;
+	-webkit-animation-duration: 2.4s;
+	animation-duration: 2.4s;
+*/
+}
+
+/* CSS for a CSS/JS fadeout solution per http://www.chrisbuttery.com/articles/fade-in-fade-out-with-javascript/ */ 
+
+/*
+@-webkit-keyframes fadeOut {
+	from {opacity: 0}
+	to {opacity: 1}
+}
+
+@keyframes fadeOut {
+	from {opacity: 0}
+	to {opacity: 1}
+}
+*/
+
+/* CSS fadeout solution 
+@-webkit-keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-out {
+  opacity: 1;
+  -webkit-animation: fadeOut 4.5s ease-out 1 forwards;
+  animation: fadeOut 4.5s ease-out 1 forwards;
+}
+
+.is-paused {
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+}
+
+*/
 
 /**********************************************
 *** PLAYERS
@@ -75,7 +143,7 @@ body {
 /*	background-color: indianred;*/
 	border-radius: 50%;
 /*	border: 1px solid;*/
-/*	font-weight: bold;*/
+	font-weight: bold;
 	font-size: 20px;
 	-webkit-animation-duration: .5s; 
 	animation-duration: 2.5s;
@@ -89,7 +157,7 @@ body {
 /*	font-weight: bold;*/
 }
 .player-name {
-    font-size: 40px;
+    font-size: 30px;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -179,8 +247,15 @@ i {
 
 .btn-new { top: 45px;}
 .btn-roll { top: 403px;}
-.btn-hold { top: 467px;}
-
+.btn-hold { top: 447px;}
+.btn-settings {
+	top: 560px;
+	left: 100px;
+}
+.btn-help {
+	top: 560px;
+	left: 900px;
+}
 
 
 .dice1, .dice2 {
@@ -220,3 +295,98 @@ i {
 */
 .winner { background-color: #f7f7f7; }
 .winner .player-name { font-weight: 300; color: #EB4D4D; }
+
+#modal-settings {
+	display: none;
+}
+.modal-dialog {
+	position: fixed;
+	display: none;
+	top:0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(150, 150, 150, 0.8);
+	z-index: 99999;
+}
+
+.modal-content {
+	position: relative;
+	background-color: #f8f7f7;
+	opacity: 1;
+	margin: 0 auto;
+	margin-top: 5%;
+	padding: 50px;
+	width: 50%;
+	height: 75%;	
+	-webkit-animation-name: slideDown;	
+	animation-name: slideDown;
+	-webkit-animation-duration: 0.4s;
+	animation-duration: 0.4s
+}
+
+@-webkit-keyframes slideDown {
+	from {top: -300px; opacity: 0}
+	to {top: 0; opacity: 1}
+}
+@keyframes slideDown {
+	from {top: -300px; opacity: 0}
+	to {top: 0; opacity: 1}
+}
+.modal-btn-close {
+	position: absolute; 
+	top: 4px;
+	right: -12px;
+}
+
+/* Form */
+
+
+label {
+	width: 35%;
+	float: left;
+}
+input, select {
+	width: 60%;
+	padding: 5px 0px 5px 5px;
+}
+
+label,
+input {
+	float: left;
+}
+
+.row {
+	width: 100%;
+	margin-bottom: 30px;
+}
+.clearfix {
+	clear: both;
+}
+.modalTitle {
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: 300;
+	letter-spacing: 1.5px;
+	margin-bottom: 30px;
+}
+.btn-save {
+	top: 325px;
+	text-align: left;
+	margin-left: 35px;
+}
+.btn-cancel {
+	top: 360px;
+	text-align: left;
+	margin-left: 35px;
+
+}
+
+#note {
+	position: absolute;
+	top: 415px;
+	color: red;
+}
+#note span {
+	font-weight: bold;
+}
