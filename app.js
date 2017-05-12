@@ -95,7 +95,7 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
 			// Switch to next player
 			switchPlayer();
 		}
-	} else {  // Game is over..Remind user to click New Game button to start new game
+	} else { // Game is over..Remind user to click New Game button to start new game
 		msgs.style.display = "block";
 		// Create error message that fades out 	
 		msgs.textContent = "Click 'New Game' button to continue play";
@@ -314,7 +314,7 @@ function resetAnimation(animationType) {
 document.querySelector('.btn-settings').addEventListener('click', function () {
 
 	// Settings can't be changed if game is actively underway
-	if (!gamePlaying || roundScore === 0 ) {
+	if (!gamePlaying || roundScore === 0) {
 		document.querySelector('#modal-settings').style.display = 'block';
 	} else {
 		// Make error message visible
@@ -324,7 +324,7 @@ document.querySelector('.btn-settings').addEventListener('click', function () {
 		msgs.style.backgroundColor = 'pink';
 		fadeOut(msgs);
 	}
-	
+
 });
 
 document.querySelector('.modal-btn-close').addEventListener('click', function () {
@@ -332,50 +332,50 @@ document.querySelector('.modal-btn-close').addEventListener('click', function ()
 });
 document.querySelector('.btn-save').addEventListener('click', function () {
 
-		var player1, player2, score;
-		player1 = document.getElementById('input-name-0').value;
-		player2 = document.getElementById('input-name-1').value;
+	var player1, player2, score;
+	player1 = document.getElementById('input-name-0').value;
+	player2 = document.getElementById('input-name-1').value;
 
 
 
-		// Reset msgs so it will show each time.
-		msgs.style = 'block';
+	// Reset msgs so it will show each time.
+	msgs.style = 'block';
 
-		//	msgs.classList.add('is-paused');
+	//	msgs.classList.add('is-paused');
 
-		// Update player names 
-		if (player1 !== "") {
-			playerNames[0] = player1;
-			document.getElementById('name-0').textContent = playerNames[0]; 
-		} else {
-			playerNames[0] = "Player1";			
-		}
+	// Update player names 
+	if (player1 !== "") {
+		playerNames[0] = player1;
+		document.getElementById('name-0').textContent = playerNames[0];
+	} else {
+		playerNames[0] = "Player1";
+	}
 
-		if (player2 !== "") {
-			playerNames[1] = player2;
-			player2.textContent = playerNames[1];
-			document.getElementById('name-1').textContent = playerNames[1]; 
-		} else {
-			playerNames[1] = "Player2";
-		}
+	if (player2 !== "") {
+		playerNames[1] = player2;
+		player2.textContent = playerNames[1];
+		document.getElementById('name-1').textContent = playerNames[1];
+	} else {
+		playerNames[1] = "Player2";
+	}
 
-		// Get element id
-		score = document.getElementById('winning-score').value;
-		
+	// Get element id
+	score = document.getElementById('winning-score').value;
 
-		// Save the new winning score
-		if (score > 0) {
-			winningScore = score;
-			document.getElementById('winScore').textContent = winningScore; 
-		}
-		// Create message to indicate settings successfully updated 	
-		msgs.textContent = "Successfully updated settings";
-		msgs.style.backgroundColor = 'lightgreen';
-		fadeOut(msgs);
 
-		numOfDice = document.getElementById('dice-value').value;
-		console.log("Number of dice:" + numOfDice);
-		document.querySelector('#modal-settings').style.display = 'none';	
+	// Save the new winning score
+	if (score > 0) {
+		winningScore = score;
+		document.getElementById('winScore').textContent = winningScore;
+	}
+	// Create message to indicate settings successfully updated 	
+	msgs.textContent = "Successfully updated settings";
+	msgs.style.backgroundColor = 'lightgreen';
+	fadeOut(msgs);
+
+	numOfDice = document.getElementById('dice-value').value;
+	console.log("Number of dice:" + numOfDice);
+	document.querySelector('#modal-settings').style.display = 'none';
 });
 
 

@@ -3,48 +3,47 @@
 **********************************************/
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 .clearfix::after {
-    content: "";
-    display: table;
-    clear: both;
+	content: "";
+	display: table;
+	clear: both;
 }
 
 body {
-    background-image: -webkit-linear-gradient(rgba(62, 20, 20, 0.4), rgba(62, 20, 20, 0.4)), url(back.jpg);
-    background-image: linear-gradient(rgba(62, 20, 20, 0.4), rgba(62, 20, 20, 0.4)), url(back.jpg);
-    background-size: cover;
-    background-position: center;
-    font-family: Lato;
-    font-weight: 300;
-    position: relative;
-    height: 100vh;
-    color: #555;
+	background-image: -webkit-linear-gradient(rgba(62, 20, 20, 0.4), rgba(62, 20, 20, 0.4)), url(back-min.jpg);
+	background-image: linear-gradient(rgba(62, 20, 20, 0.4), rgba(62, 20, 20, 0.4)), url(back-min.jpg);
+	background-size: cover;
+	background-position: center;
+	font-family: Lato;
+	font-weight: 300;
+	position: relative;
+	height: 100vh;
+	color: #555;
 }
 
 .wrapper {
-    width: 1000px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
+	width: 1000px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
 }
 
 .player-0-panel,
 .player-1-panel {
-    width: 50%;
-    float: left;
-    height: 600px;
-    padding: 100px;
+	width: 50%;
+	float: left;
+	height: 600px;
+	padding: 100px;
 }
 
 .matchScore {
@@ -54,36 +53,40 @@ body {
 	letter-spacing: 2px;
 	text-transform: uppercase;
 	background-color: #EB4D4D;
-/*	border: 1px solid #5c5959;*/
+	/*	border: 1px solid #5c5959;*/
 	border-radius: 10px;
 	-webkit-animation-duration: 1s;
 	animation-duration: 3s;
-	
 }
 
 .scoreSetting {
 	position: absolute;
-	top: 560px; /* top: 560px */ /* top: 10px */
+	top: 560px;
+	/* top: 560px */
+	/* top: 10px */
 	left: 50%;
 	font-size: 20px;
 	-webkit-transform: translateX(-50%);
 	transform: translateX(-50%);
-	text-transform: uppercase;	
+	text-transform: uppercase;
 }
+
 #winScore {
-	font-weight: bold;
-	color: red
+	/*	font-weight: bold;*/
+	color: red;
 }
 
 .messages {
 	position: absolute;
-	top: 10px; /* top: 560px */ /* top: 10px */
+	top: 10px;
+	/* top: 560px */
+	/* top: 10px */
 	left: 50%;
 	font-size: 20px;
 	-webkit-transform: translateX(-50%);
 	transform: translateX(-50%);
-/*	text-transform: uppercase;*/
-/*
+	/*	text-transform: uppercase;*/
+	/*
 	opacity: 0;
 	-webkit-animation-name: fadeOut;
 	animation-name: fadeOut;
@@ -92,7 +95,9 @@ body {
 */
 }
 
-/* CSS for a CSS/JS fadeout solution per http://www.chrisbuttery.com/articles/fade-in-fade-out-with-javascript/ */ 
+
+/* CSS for a CSS/JS fadeout solution per http://www.chrisbuttery.com/articles/fade-in-fade-out-with-javascript/ */
+
 
 /*
 @-webkit-keyframes fadeOut {
@@ -105,6 +110,7 @@ body {
 	to {opacity: 1}
 }
 */
+
 
 /* CSS fadeout solution 
 @-webkit-keyframes fadeOut {
@@ -131,6 +137,7 @@ body {
 
 */
 
+
 /**********************************************
 *** PLAYERS
 **********************************************/
@@ -140,131 +147,151 @@ body {
 	display: inline-block;
 	padding: 5px 10px 10px;
 	color: white;
-/*	background-color: indianred;*/
+	/*	background-color: indianred;*/
 	border-radius: 50%;
-/*	border: 1px solid;*/
+	/*	border: 1px solid;*/
 	font-weight: bold;
 	font-size: 20px;
-	-webkit-animation-duration: .5s; 
+	-webkit-animation-duration: .5s;
 	animation-duration: 2.5s;
 	-webkit-transition: color 2s;
 	transition: color 2s;
 }
 
 .player-0-gamesWonCount.gameWinner,
-.player-1-gamesWonCount.gameWinner  { 
+.player-1-gamesWonCount.gameWinner {
 	color: white;
-/*	font-weight: bold;*/
+	/*	font-weight: bold;*/
 }
+
 .player-name {
-    font-size: 30px;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 100;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    position: relative;
+	font-size: 30px;
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: 100;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	position: relative;
 }
 
 .player-score {
-    text-align: center;
-    font-size: 80px;
-    font-weight: 100;
-    color: #EB4D4D;
-    margin-bottom: 130px;
+	text-align: center;
+	font-size: 80px;
+	font-weight: 100;
+	color: #EB4D4D;
+	margin-bottom: 130px;
 }
 
-.active { background-color: #f7f7f7; }
-.active .player-name { font-weight: 300; }
+.active {
+	background-color: #f7f7f7;
+}
+
+.active .player-name {
+	font-weight: 300;
+}
 
 .active .player-name::after {
-    content: "\2022";
-    font-size: 47px;
-    position: absolute;
-    color: #EB4D4D;
-    top: -7px;
-    right: 10px;
-
+	content: "\2022";
+	font-size: 47px;
+	position: absolute;
+	color: #EB4D4D;
+	top: -7px;
+	right: 10px;
 }
 
 .player-current-box {
-    background-color: #EB4D4D;
-    color: #fff;
-    width: 40%;
-    margin: 0 auto;
-    padding: 12px;
-    text-align: center;
+	background-color: #EB4D4D;
+	color: #fff;
+	width: 40%;
+	margin: 0 auto;
+	padding: 12px;
+	text-align: center;
 }
 
 .player-current-label {
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    font-size: 12px;
-    color: #222;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+	font-size: 12px;
+	color: #222;
 }
 
 .player-current-score {
-    font-size: 30px;
+	font-size: 30px;
 }
 
 button {
-    position: absolute;
-    width: 200px;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
-    color: #555;
-    background: none;
-    border: none;
-    font-family: Lato;
-    font-size: 20px;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-weight: 300;
-    -webkit-transition: background-color 0.3s, color 0.3s;
-    transition: background-color 0.3s, color 0.3s;
+	position: absolute;
+	width: 200px;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	color: #555;
+	background: none;
+	border: none;
+	font-family: Lato;
+	font-size: 20px;
+	text-transform: uppercase;
+	cursor: pointer;
+	font-weight: 300;
+	-webkit-transition: background-color 0.3s, color 0.3s;
+	transition: background-color 0.3s, color 0.3s;
 }
 
-button:hover { font-weight: 600; }
-button:hover i { margin-right: 20px; }
+button:hover {
+	font-weight: 600;
+}
+
+button:hover i {
+	margin-right: 20px;
+}
 
 button:focus {
-    outline: none;
+	outline: none;
 }
 
 i {
-    color: #EB4D4D;
-    display: inline-block;
-    margin-right: 15px;
-    font-size: 32px;
-    line-height: 1;
-    vertical-align: text-top;
-    margin-top: -4px;
-    -webkit-transition: margin 0.3s;
-    transition: margin 0.3s;
+	color: #EB4D4D;
+	display: inline-block;
+	margin-right: 15px;
+	font-size: 32px;
+	line-height: 1;
+	vertical-align: text-top;
+	margin-top: -4px;
+	-webkit-transition: margin 0.3s;
+	transition: margin 0.3s;
 }
 
-.btn-new { top: 45px;}
-.btn-roll { top: 403px;}
-.btn-hold { top: 447px;}
+.btn-new {
+	top: 45px;
+}
+
+.btn-roll {
+	top: 403px;
+}
+
+.btn-hold {
+	top: 447px;
+}
+
 .btn-settings {
 	top: 560px;
 	left: 100px;
 }
+
 .btn-help {
 	top: 560px;
 	left: 900px;
 }
 
-
-.dice1, .dice2 {
+.dice1,
+.dice2 {
 	position: absolute;
-    left: 50%;
+	left: 50%;
 	-webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
-    height: 100px;
-    box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
+	transform: translateX(-50%);
+	height: 100px;
+	box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
 	-webkit-animation-delay: 2s;
 	animation-delay: .2s;
 	-webkit-animation-duration: 1s;
@@ -272,37 +299,52 @@ i {
 }
 
 .dice1 {
-    top: 110px;
+	top: 110px;
 }
 
 .dice2 {
-    top: 275px;
+	top: 275px;
 }
 
+
 /* NEW**** Dice Panel */
+
+
 /*
 .dice-1-panel {
 	position: relative;
 	display: none;	
 }
 */
+
+
 /* NEW**** Dice Panel */
+
+
 /*
 .dice-2-panel {
 	position: relative;
 	display: block;
 }
 */
-.winner { background-color: #f7f7f7; }
-.winner .player-name { font-weight: 300; color: #EB4D4D; }
+
+.winner {
+	background-color: #f7f7f7;
+}
+
+.winner .player-name {
+	font-weight: 300;
+	color: #EB4D4D;
+}
 
 #modal-settings {
 	display: none;
 }
+
 .modal-dialog {
 	position: fixed;
 	display: none;
-	top:0;
+	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
@@ -318,35 +360,52 @@ i {
 	margin-top: 5%;
 	padding: 50px;
 	width: 50%;
-	height: 75%;	
-	-webkit-animation-name: slideDown;	
+	height: 75%;
+	-webkit-animation-name: slideDown;
 	animation-name: slideDown;
 	-webkit-animation-duration: 0.4s;
 	animation-duration: 0.4s
 }
 
 @-webkit-keyframes slideDown {
-	from {top: -300px; opacity: 0}
-	to {top: 0; opacity: 1}
+	from {
+		top: -300px;
+		opacity: 0
+	}
+	to {
+		top: 0;
+		opacity: 1
+	}
 }
+
 @keyframes slideDown {
-	from {top: -300px; opacity: 0}
-	to {top: 0; opacity: 1}
+	from {
+		top: -300px;
+		opacity: 0
+	}
+	to {
+		top: 0;
+		opacity: 1
+	}
 }
-.modal-btn-close {
-	position: absolute; 
+
+.modal-btn-close i {
+	position: absolute;
+	font-size: 20px;
 	top: 4px;
-	right: -12px;
+	right: -10px;
 }
+
 
 /* Form */
-
 
 label {
 	width: 35%;
 	float: left;
 }
-input, select {
+
+input,
+select {
 	width: 60%;
 	padding: 5px 0px 5px 5px;
 }
@@ -360,9 +419,11 @@ input {
 	width: 100%;
 	margin-bottom: 30px;
 }
+
 .clearfix {
 	clear: both;
 }
+
 .modalTitle {
 	text-align: center;
 	text-transform: uppercase;
@@ -370,16 +431,17 @@ input {
 	letter-spacing: 1.5px;
 	margin-bottom: 30px;
 }
+
 .btn-save {
-	top: 325px;
-	text-align: left;
-	margin-left: 35px;
-}
-.btn-cancel {
 	top: 360px;
 	text-align: left;
 	margin-left: 35px;
+}
 
+.btn-cancel {
+	top: 395px;
+	text-align: left;
+	margin-left: 35px;
 }
 
 #note {
@@ -387,6 +449,7 @@ input {
 	top: 415px;
 	color: red;
 }
+
 #note span {
 	font-weight: bold;
 }
