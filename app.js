@@ -25,20 +25,18 @@ b) When the user clicks hold then animate dice disappearance
 */
 
 var scores, roundScore, activePlayer, gamePlaying, gamesWonCount, playerNames, winningScore, numOfDice, matchScore, msgs;
-//var bounceOut = 'bounceOutUp';
-//var rotateOut = 'rotateOut';
+
+// Get element references
+msgs = document.querySelector('.messages');
+
+/**********************************************************/
+/* Initialize Match and Game values
+/**********************************************************/
 
 /* Used to track how many games each players have won */
 gamesWonCount = [0, 0];
 playerNames = ['Player1', 'Player2'];
-winningScore = 100;
-// Get element references
-msgs = document.querySelector('.messages');
-
-
-/* Animate entrance of matchscore heading ...note 'querySelector()' only returns first matching element so I had to use querySelectorAll() which returns a list of matching elements. Then I looped over that list to add the desired animation class.
- */
-matchScore = document.querySelectorAll('.matchScore');
+winningScore = 20;
 
 /* Initialize all values of the game - note this method is also called when you click on "new game" button. Adding the concept of matches (multiple games)...may need to break this method into multiple parts e.g., initGame(), initMatch and initNewGame() as you may no need to initialize different levels of game variables at different concepts. 
  */
@@ -55,11 +53,13 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
 		resetAnimation('rubberBand');
 		resetAnimation('rotateOut');
 		resetAnimation('bounceOutUp');
-		/* Note: Could have used simple assignment (e.g. matchScore[0] & matchScore[1] rather than loop but I wanted to practice loops. :-)
-		 */
-		for (var i = 0; i < matchScore.length; i++) {
-			matchScore[i].classList.add('flipInY');
-		}
+
+		// *********** Reset rubberband animation that was added in Hold button when game is won 
+		document.querySelector('.player-' + activePlayer + '-gamesWonCount').classList.remove('rubberBand');
+
+		// Resets animation that was set by pressing "New Game" button
+		matchScore[0].classList.remove('flipInY');
+		matchScore[1].classList.remove('flipInY');
 
 		// 1. Random number
 		var dice1 = Math.floor(Math.random() * 6) + 1;
@@ -74,7 +74,7 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
 		diceDOM2.style.display = 'block';
 
 
-		// 3. Add flip animation to dice
+		// 3. Add rubber band animation to dice
 		addAnimation('rubberBand');
 
 		// Display dice image corresponding to dice number rolled
@@ -127,8 +127,8 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
 			gamesWonCount[activePlayer] += 1;
 			document.querySelector('.player-' + activePlayer + '-gamesWonCount').textContent = gamesWonCount[activePlayer];
 
-			// Animate Games Won Count
-			document.querySelector('.player-' + activePlayer + '-gamesWonCount').classList.toggle('rubberBand');
+			// *********** Test Rubberband on Games won
+			document.querySelector('.player-' + activePlayer + '-gamesWonCount').classList.add('rubberBand');
 
 			// Add transition count color from orange to white once you are on the scoreboard
 			document.querySelector('.player-' + activePlayer + '-gamesWonCount').classList.add('gameWinner');
@@ -172,6 +172,14 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
 // ******************* NEW GAME BUTTON *******************************
 
 document.querySelector('.btn-new').addEventListener('click', function () {
+
+	// Needed to add 'flipInY' here to ensure that animation anytime you hit 'New Game' button
+	matchScore = document.querySelectorAll('.matchScore');
+	//	matchScore[0].classList.remove('flipInY');
+	//	matchScore[1].classList.remove('flipInY');
+	matchScore[0].classList.add('flipInY');
+	matchScore[1].classList.add('flipInY');
+
 	if (roundScore === 0 && scores[0] === 0 && scores[1] === 0) {
 		// Make informational message visible
 		msgs.style = 'block';
@@ -237,10 +245,6 @@ function init() {
 	document.querySelector('.player-0-panel').classList.remove('active');
 	document.querySelector('.player-1-panel').classList.remove('active');
 	document.querySelector('.player-0-panel').classList.add('active');
-
-	// Animate Matchscore headings
-
-
 }
 
 
