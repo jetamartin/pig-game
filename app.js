@@ -314,7 +314,11 @@ function resetAnimation(animationType) {
 	}, false);
 }
 
-/* Modal Windows */
+/********************************    MODAL WINDOWS        ****************************/
+
+//*********************************************************
+// Open Settings Modal Windows 
+//*********************************************************
 document.querySelector('.btn-settings').addEventListener('click', function () {
 
 	// Settings can't be changed if game is actively underway
@@ -328,34 +332,36 @@ document.querySelector('.btn-settings').addEventListener('click', function () {
 		msgs.style.backgroundColor = 'pink';
 		fadeOut(msgs);
 	}
-
 });
-
+//*********************************************************
+// Close Settings Modal Windows 
+//*********************************************************
 document.querySelector('.modal-btn-close').addEventListener('click', function () {
 	document.querySelector('#modal-settings').style.display = 'none';
 });
-document.querySelector('.btn-save').addEventListener('click', function () {
 
+
+//*********************************************************
+// Save Settings in Settings Modal Windows 
+//*********************************************************
+document.querySelector('.btn-save').addEventListener('click', function () {
 	var player1, player2, score;
 	player1 = document.getElementById('input-name-0').value;
 	player2 = document.getElementById('input-name-1').value;
 
-
-
 	// Reset msgs so it will show each time.
 	msgs.style = 'block';
 
-	//	msgs.classList.add('is-paused');
+	// Update player names if player name is provided and player name not blank 
+	if (isNotEmptyAndNotWhitespace(player1)) {
 
-	// Update player names 
-	if (player1 !== "") {
 		playerNames[0] = player1;
 		document.getElementById('name-0').textContent = playerNames[0];
 	} else {
 		playerNames[0] = "Player1";
 	}
 
-	if (player2 !== "") {
+	if (isNotEmptyAndNotWhitespace(player1)) {
 		playerNames[1] = player2;
 		player2.textContent = playerNames[1];
 		document.getElementById('name-1').textContent = playerNames[1];
@@ -403,4 +409,8 @@ function fadeOut(el) {
 			requestAnimationFrame(fade);
 		}
 	})();
+}
+
+function isNotEmptyAndNotWhitespace(text) {
+	return text.length > 0 && /[^\s]/.test(text);
 }
