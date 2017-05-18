@@ -53,60 +53,66 @@
 				<span class="modal-btn-close"><i class="ion-close-round"></i></span>
 				<h2 class="modalTitle">Settings</h2>
 
-				<!--				<form class="config-settings">-->
-				<div class="row clearfix">
-					<div>
-						<label>Player 1:</label>
+				<form name="config-settings" onsubmit="return getSettings()">
+					<!--				<form name="config-settings">-->
+					<div class="row clearfix">
+						<div>
+							<label>Player 1:</label>
+						</div>
+						<div>
+							<input type="text" name="input-name-0" id="input-name-0" maxlength="10" placeholder="Enter name" pattern="^(?!\s*$).+">
+						</div>
 					</div>
-					<div>
-						<input type="text" name="input-name-0" id="input-name-0" maxlength="10" placeholder="Enter name">
+					<div class="row clearfix">
+						<div>
+							<label>Player 2:</label>
+						</div>
+						<div>
+							<input type="text" name="input-name-1" id="input-name-1" maxlength="6" placeholder="Enter name" pattern="^(?!\s*$).+">
+						</div>
 					</div>
-				</div>
-				<div class="row clearfix">
-					<div>
-						<label>Player 2:</label>
+					<div class="row clearfix">
+						<div>
+							<label>Winning Score:</label>
+						</div>
+						<div>
+							<input type="number" name="winning-score" id="winning-score" min="10" max="999" default="100" placeholder="Enter winning score">
+						</div>
 					</div>
-					<div>
-						<input type="text" name="input-name-1" id="input-name-1" maxlength="6" placeholder="Enter name">
-					</div>
-				</div>
-				<div class="row clearfix">
-					<div>
-						<label>Winning Score:</label>
-					</div>
-					<div>
-						<input type="number" name="winning-score" id="winning-score" default="100" placeholder="Enter winning score">
-					</div>
-				</div>
-				<div class="row clearfix">
-					<div>
-						<label>Number of Dice:</label>
-					</div>
-					<div>
-						<select name="diceValues" id="dice-value">
+					<div class="row clearfix">
+						<div>
+							<label>Number of Dice:</label>
+						</div>
+						<div>
+							<select name="diceValues" id="dice-value">
 							  <option value=""> - Select - </option>
 							  <option value="dice-1">One Dice</option> 
 							  <option value="dice-2">Two Dice</option> 
 							</select>
+						</div>
 					</div>
-				</div>
-				<!--				</form>-->
-				<button class="btn-save"><i class="ion-ios-checkmark-outline"></i>Save</button>
-				<button class="btn-cancel"><i class="ion-ios-close-outline"></i>Cancel</button>
+					<!--	Below is alt method I used to submit form..yields same results		-->
+					<!--	<input type="submit" value="Submit" onclick="getSettings()">-->
+					<i class="ion-ios-checkmark-outline check-icon"></i>
+					<input type="submit" class="btn-save" value="Save">
+				</form>
+
+				<!--				<button class=" btn-save"><i class="ion-ios-checkmark-outline "></i>Save</button>-->
+				<button class="btn-cancel"><i class="ion-ios-close-outline "></i>Cancel</button>
 			</div>
 
 		</div>
 
-		<!--			<div class="dice-1-panel">-->
-		<img src="dice-5.png" alt="Dice" class="dice1 animated">
+		<!--			<div class="dice-1-panel ">-->
+		<img src="dice-5.png " alt="Dice " class="dice1 animated ">
 		<!--			</div>-->
-		<!--			<div class="dice-2-panel">-->
-		<!--				<img src="dice-5.png" alt="Dice" class="dice1 animated">-->
-		<img src="dice-5.png" alt="Dice" class="dice2 animated">
+		<!--			<div class="dice-2-panel ">-->
+		<!--				<img src="dice-5.png " alt="Dice " class="dice1 animated ">-->
+		<img src="dice-5.png " alt="Dice " class="dice2 animated ">
 		<!--			</div>-->
 	</div>
 
-	<script src="app.js"></script>
+	<script src="app.js "></script>
 </body>
 
 </html>

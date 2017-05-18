@@ -24,10 +24,16 @@ b) When the user clicks hold then animate dice disappearance
 8) A help modal which provides instructions for the game (including my implementation of slightly different game rules for the two-dice mode).
 */
 
+// Global variables
 var scores, roundScore, activePlayer, gamePlaying, gamesWonCount, playerNames, winningScore, numOfDice, matchScore, msgs;
+var player0, player1, score;
+var player0Field = document.getElementById('name-0');
+var player1Field = document.getElementById('name-1');
+var scoreField = document.getElementById('winScore');
 
 // Get element references
 msgs = document.querySelector('.messages');
+matchScore = document.querySelectorAll('.matchScore');
 
 /**********************************************************/
 /* Initialize Match and Game values
@@ -174,9 +180,6 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
 document.querySelector('.btn-new').addEventListener('click', function () {
 
 	// Needed to add 'flipInY' here to ensure that animation anytime you hit 'New Game' button
-	matchScore = document.querySelectorAll('.matchScore');
-	//	matchScore[0].classList.remove('flipInY');
-	//	matchScore[1].classList.remove('flipInY');
 	matchScore[0].classList.add('flipInY');
 	matchScore[1].classList.add('flipInY');
 
@@ -344,49 +347,71 @@ document.querySelector('.modal-btn-close').addEventListener('click', function ()
 //*********************************************************
 // Save Settings in Settings Modal Windows 
 //*********************************************************
-document.querySelector('.btn-save').addEventListener('click', function () {
-	var player1, player2, score;
-	player1 = document.getElementById('input-name-0').value;
-	player2 = document.getElementById('input-name-1').value;
-
-	// Reset msgs so it will show each time.
-	msgs.style = 'block';
-
-	// Update player names if player name is provided and player name not blank 
-	if (isNotEmptyAndNotWhitespace(player1)) {
-
-		playerNames[0] = player1;
-		document.getElementById('name-0').textContent = playerNames[0];
-	} else {
-		playerNames[0] = "Player1";
-	}
-
-	if (isNotEmptyAndNotWhitespace(player1)) {
-		playerNames[1] = player2;
-		player2.textContent = playerNames[1];
-		document.getElementById('name-1').textContent = playerNames[1];
-	} else {
-		playerNames[1] = "Player2";
-	}
-
-	// Get element id
-	score = document.getElementById('winning-score').value;
-
-
-	// Save the new winning score
-	if (score > 0) {
-		winningScore = score;
-		document.getElementById('winScore').textContent = winningScore;
-	}
-	// Create message to indicate settings successfully updated 	
-	msgs.textContent = "Successfully updated settings";
-	msgs.style.backgroundColor = 'lightgreen';
-	fadeOut(msgs);
-
-	numOfDice = document.getElementById('dice-value').value;
-	console.log("Number of dice:" + numOfDice);
-	document.querySelector('#modal-settings').style.display = 'none';
-});
+//document.querySelector('.btn-save').addEventListener('click', function () {
+//	var player1, player2, score;
+//	var player0Field = document.getElementById('input-name-0');
+//	var player1Field = document.getElementById('input-name-1');
+//	var errMsg;
+//
+//
+//	// Reset msgs so it will show each time.
+//	msgs.style = 'block';
+//
+//	player0 = player0Field.value;
+//	player1 = player1Field.value;
+//
+//	// Update player names if player name is provided and player name not blank 
+//	if (player0.length > 0) {
+//		if (isNotEmptyString(player0)) {
+//			errMsg = "";
+//			document.querySelector('.errMsg').style.display = 'none';
+//			playerNames[0] = player0;
+//			document.getElementById('name-0').textContent = playerNames[0];
+//		} else {
+//			//			player0Field.value = "";
+//			errMsg = "Invalid Player name..all blanks!";
+//			document.querySelector('.errMsg').innerHTML = errMsg;
+//			document.querySelector('.errMsg').style.display = 'inline';
+//		}
+//	} else {
+//		if (errMsg !== "") {
+//			errMsg = "";
+//			document.querySelector('.errMsg').style.display = 'none';
+//		}
+//	}
+//
+//	if (player1.length > 0) {
+//		if (isNotEmptyString(player1)) {
+//			playerNames[1] = player1;
+//			document.getElementById('name-1').textContent = playerNames[1];
+//		} else {
+//			playerField1.value = "";
+//		}
+//	}
+//
+//	// Get element id
+//	score = document.getElementById('winning-score').value;
+//
+//	// Save the new winning score
+//	if (score > 0) {
+//		winningScore = score;
+//		document.getElementById('winScore').textContent = winningScore;
+//	}
+//	// Create message to indicate settings successfully updated 	
+//	msgs.textContent = "Successfully updated settings";
+//	msgs.style.backgroundColor = 'lightgreen';
+//	fadeOut(msgs);
+//
+//	numOfDice = document.getElementById('dice-value').value;
+//	console.log("Number of dice:" + numOfDice);
+//	if (errMsg === "") {
+//		document.querySelector('#modal-settings').style.display = 'none';
+//	} else {
+//		document.querySelector('#modal-settings').style.display = 'display';
+//		//		errMsg = "";
+//	}
+//	//	document.querySelector('#modal-settings').style.display = 'none';
+//});
 
 
 document.querySelector('.btn-cancel').addEventListener('click', function () {
@@ -411,6 +436,72 @@ function fadeOut(el) {
 	})();
 }
 
-function isNotEmptyAndNotWhitespace(text) {
-	return text.length > 0 && /[^\s]/.test(text);
+/* Determine if field is empty or contains just whitespace */
+/* http://stackoverflow.com/questions/1172206/how-to-check-if-a-text-is-all-white-space-characters-in-client-side */
+function isNotEmptyString(text) {
+	return /[a-zA-Z][a-zA-Z0-9\s]*/.test(text);
 }
+
+function isNameValid(name) {
+	if (text.length > 0 && /^\s*$/.test(name))
+		errMsg = " ";
+
+}
+
+function getSettings() {
+	var hasValueChanged = false;
+	// Alternative call if I want this function to be called via eventListner
+	//document.querySelector('.btn-save').addEventListener('click', function () {
+
+	console.log("getSettings method called");
+
+	player0 = document.forms["config-settings"]["input-name-0"].value;
+	player1 = document.forms["config-settings"]["input-name-1"].value;
+	score = document.forms["config-settings"]["winning-score"].value;
+
+	// Reset msgs so they will be displayed each time
+	msgs.style = 'block';
+
+	// Only save player name value if valid input provided
+	if (player0 !== "") {
+		playerNames[0] = player0;
+		player0Field.innerHTML = playerNames[0];
+		hasValueChanged = true;
+	}
+
+	// Only save player name value if valid input provided
+	if (player1 !== "") {
+		playerNames[1] = player1;
+		player1Field.textContent = playerNames[1];
+		hasValueChanged = true;
+
+	}
+
+	// Only save score if valid input is provided
+	if (score !== "") {
+		// Set Winning score on UI to value on form 
+		scoreField.textContent = score;
+		// Save new score value
+		winningScore = score;
+		hasValueChanged = true;
+
+	}
+
+
+	//	numOfDice = document.getElementById('dice-value').value;
+
+	// Only show "successful update" message if a value was actually changed
+	if (hasValueChanged) {
+		// Create message to indicate settings successfully updated 	
+		msgs.textContent = "Successfully updated settings";
+		msgs.style.backgroundColor = 'lightgreen';
+		fadeOut(msgs);
+	}
+
+
+	// Hide modal window
+	document.querySelector('#modal-settings').style.display = 'none';
+	// You must return false or else all changes made to web values will revert to orig values on exit
+	return false;
+}
+//});
